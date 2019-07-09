@@ -1,0 +1,8 @@
+*.log
+*.dat
+*.cert
+*.key
+regtest
+data
+*.sqlite
+*.sqlite3

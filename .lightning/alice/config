@@ -1,0 +1,9 @@
+network=regtest
+alias=alice
+
+autolisten=false
+addr=0.0.0.0:9735
+
+bitcoin-rpcport=18443
+bitcoin-rpcuser=user
+bitcoin-rpcpassword=password

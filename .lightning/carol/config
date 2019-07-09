@@ -1,0 +1,9 @@
+network=regtest
+alias=carol
+
+autolisten=false
+addr=0.0.0.0:9737
+
+bitcoin-rpcport=18443
+bitcoin-rpcuser=user
+bitcoin-rpcpassword=password
