@@ -11,6 +11,8 @@ alias bob-clightning='$CLIGHTNING_BIN --lightning-dir=$HOME/.lightning/bob'
 alias bob-clightning-cli='$CLIGHTNING_CLI --lightning-dir=$HOME/.lightning/bob'
 alias carol-clightning='$CLIGHTNING_BIN --lightning-dir=$HOME/.lightning/carol'
 alias carol-clightning-cli='$CLIGHTNING_CLI --lightning-dir=$HOME/.lightning/carol'
+alias dave-clightning='$CLIGHTNING_BIN --lightning-dir=$HOME/.lightning/dave'
+alias dave-clightning-cli='$CLIGHTNING_CLI --lightning-dir=$HOME/.lightning/dave'
 
 ##### Eclair #####
 
@@ -27,6 +29,8 @@ alias bob-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.dat
 alias bob-eclair-cli='$ECLAIR_CLI -p password -a localhost:9001'
 alias carol-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/carol -jar $ECLAIR_JAR'
 alias carol-eclair-cli='$ECLAIR_CLI -p password -a localhost:9002'
+alias dave-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/dave -jar $ECLAIR_JAR'
+alias dave-eclair-cli='$ECLAIR_CLI -p password -a localhost:9003'
 
 ##### LND #####
 
@@ -40,3 +44,5 @@ alias bob-lnd='$LND_BIN --lnddir=$HOME/.lnd/bob'
 alias bob-lnd-cli='$LND_CLI --lnddir=$HOME/.lnd/bob --rpcserver=localhost:10010 --network=regtest'
 alias carol-lnd='$LND_BIN --lnddir=$HOME/.lnd/carol'
 alias carol-lnd-cli='$LND_CLI --lnddir=$HOME/.lnd/carol --rpcserver=localhost:10011 --network=regtest'
+alias dave-lnd='$LND_BIN --lnddir=$HOME/.lnd/dave'
+alias dave-lnd-cli='$LND_CLI --lnddir=$HOME/.lnd/dave --rpcserver=localhost:10012 --network=regtest'

@@ -1,0 +1,9 @@
+network=regtest
+alias=dave
+
+autolisten=false
+addr=0.0.0.0:9738
+
+bitcoin-rpcport=18443
+bitcoin-rpcuser=user
+bitcoin-rpcpassword=password
