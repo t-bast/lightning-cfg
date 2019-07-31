@@ -23,13 +23,13 @@ ECLAIR_CLI=/usr/bin/eclair-cli
 # Set the path to the eclair logging configuration to use (default one provided in .eclair):
 ECLAIR_LOG_CONF=$HOME/.eclair/logback.xml
 
-alias alice-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/alice -jar $ECLAIR_JAR'
+alias alice-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/alice -jar $ECLAIR_JAR'
 alias alice-eclair-cli='$ECLAIR_CLI -p password -a localhost:9000'
-alias bob-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/bob -jar $ECLAIR_JAR'
+alias bob-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/bob -jar $ECLAIR_JAR'
 alias bob-eclair-cli='$ECLAIR_CLI -p password -a localhost:9001'
-alias carol-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/carol -jar $ECLAIR_JAR'
+alias carol-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/carol -jar $ECLAIR_JAR'
 alias carol-eclair-cli='$ECLAIR_CLI -p password -a localhost:9002'
-alias dave-eclair='java -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/dave -jar $ECLAIR_JAR'
+alias dave-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=$HOME/.eclair/dave -jar $ECLAIR_JAR'
 alias dave-eclair-cli='$ECLAIR_CLI -p password -a localhost:9003'
 
 ##### LND #####

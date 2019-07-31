@@ -5,7 +5,7 @@
         <target>System.out</target>
         <withJansi>false</withJansi>
         <encoder>
-            <pattern>%yellow(${HOSTNAME} %d) %highlight(%-5level) %logger{24} %X{nodeId}%X{channelId} - %msg%ex{12}%n</pattern>
+            <pattern>%yellow(${HOSTNAME} %d) %highlight(%-5level) %logger{24} %X{nodeId}%X{channelId}%X{paymentId} - %msg%ex{12}%n</pattern>
         </encoder>
     </appender>
 
@@ -19,7 +19,7 @@
             <totalSizeCap>5GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d %-5level %logger{24} %X{nodeId}%X{channelId} - %msg%ex{24}%n</pattern>
+            <pattern>%d %-5level %logger{24} %X{nodeId}%X{channelId}%X{paymentId} - %msg%ex{24}%n</pattern>
         </encoder>
     </appender>
 
@@ -39,6 +39,9 @@
     <logger level="INFO" name="keylog" additivity="false">
         <appender-ref ref="KEYLOG"/>
     </logger>
+
+    <logger name="fr.acinq.eclair.router" level="DEBUG"/>
+    <logger name="fr.acinq.eclair.payment" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="ROLLING"/>
