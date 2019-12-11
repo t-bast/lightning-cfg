@@ -25,7 +25,7 @@ btc-cli generatetoaddress 10 $MINER
 
 echo Opening channels between Alice and Bob...
 alice-eclair-cli connect --uri=$BOB_ID@localhost:9736
-alice-eclair-cli open --nodeId=$BOB_ID --fundingSatoshis=300000
+alice-eclair-cli open --nodeId=$BOB_ID --fundingSatoshis=210000
 
 echo Opening channels between Alice and Carol...
 alice-eclair-cli connect --uri=$CAROL_ID@localhost:9737
@@ -33,11 +33,11 @@ alice-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=240000
 
 echo Opening channels between Bob and Dave...
 bob-eclair-cli connect --uri=$DAVE_ID@localhost:9738
-bob-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=420000
+bob-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=220000
 
 echo Opening channels between Carol and Dave...
 carol-eclair-cli connect --uri=$DAVE_ID@localhost:9738
-carol-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=510000
+carol-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=250000
 
 echo Generating a few blocks to confirm channels...
 btc-cli generatetoaddress 10 $MINER
@@ -63,11 +63,18 @@ sleep 10
 alice-eclair-cli getsentinfo --id=$PAYMENT_ID
 
 echo Generating multi-part invoice...
-INVOICE2=$(alice-eclair-cli createinvoice --amountMsat=230000000 --description="MPP is #reckless" --allowMultiPart=true | jq .serialized)
+INVOICE2=$(alice-eclair-cli createinvoice --amountMsat=100000000 --description="MPP is #reckless" --allowMultiPart=true | jq .serialized)
 PAYMENT_HASH=$(alice-eclair-cli listinvoices | jq '.[0] | .paymentHash')
+sleep 10
 
 echo Paying multi-part invoice
-dave-clightning-cli pay $INVOICE2
-sleep 10
+PAYMENT_SECRET=$(dave-clightning-cli decodepay $INVOICE2 | jq .payment_secret)
+ROUTE1=$(dave-clightning-cli getroute $ALICE_ID 50000000 0 null null null [$BOB_ID] | jq -c .route)
+dave-clightning-cli sendpay $ROUTE1 $PAYMENT_HASH null 100000000 $INVOICE2 $PAYMENT_SECRET 1
+sleep 5
+
+ROUTE2=$(dave-clightning-cli getroute $ALICE_ID 50000000 0 null null null [$CAROL_ID] | jq -c .route)
+dave-clightning-cli sendpay $ROUTE2 $PAYMENT_HASH null 100000000 $INVOICE2 $PAYMENT_SECRET 2
+sleep 5
 
 alice-eclair-cli getreceivedinfo --paymentHash=$PAYMENT_HASH

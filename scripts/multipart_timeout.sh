@@ -52,7 +52,8 @@ carol-eclair-cli channels | jq '.[] | {shortChannelId: .data.shortChannelId, cap
 echo Generating multi-part invoice...
 DAVE_INVOICE=$(dave-clightning-cli invoice 250000000 "#lightning" "MPP is #reckless" | jq '. | {invoice: .bolt11, paymentHash: .payment_hash}')
 INVOICE=$(echo $DAVE_INVOICE | jq .invoice)
-PAYMENT_HASH=$(echo $DAVE_INVOICE | jq .payment_hash)
+PAYMENT_HASH=$(echo $DAVE_INVOICE | jq .paymentHash)
+echo $PAYMENT_HASH
 
 echo Awaiting broadcast network state...
 sleep 60
