@@ -6,22 +6,19 @@ specific versions of eclair, lnd or c-lightning with multi-hop payments.
 
 ## How to use
 
+Note: scripts need to be run from the top-level directory.
+
 ### Run Bitcoin in regtest mode
 
-Copy the `.bitcoin` folder to your home directory (be careful not to overwrite
-your previous bitcoin configuration if you have one).
-
-Run bitcoin daemon:
+Run the bitcoin daemon with the following script:
 
 ```sh
-bitcoind -daemon
+scripts/start_bitcoin.sh
 ```
 
-### Run Lightning Nodes
+Note: you can tweak the default Bitcoin configuration in `.bitcoin/bitcoin.conf`.
 
-Copy the `.eclair`, `.lnd` and `.lightning` folders to your home directory (be
-careful not to overwrite your previous lightning configurations if you have
-some).
+### Run Lightning Nodes
 
 Edit the `.bash_aliases` file to fill the required environment variables:
 
@@ -42,3 +39,25 @@ source .bash_aliases
 ```
 
 Use the provided aliases to run your nodes.
+
+For example:
+
+```sh
+alice-eclair
+dave-clightning
+```
+
+Nodes will store their data in sub-directories of this repository so it won't
+conflict with other nodes you may be running on your machine.
+
+### Test scenario
+
+The `scripts` folder contains some test scenario.
+Don't hesitate to tweak them to test other scenario.
+If your test script may be useful to others, please open a PR!
+
+For example:
+
+```sh
+scripts/multipart_direct_peer.sh
+```

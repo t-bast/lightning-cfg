@@ -2,7 +2,7 @@
 # This script connects nodes and creates some channels.
 
 shopt -s expand_aliases
-source ../.bash_aliases
+source .bash_aliases
 
 ALICE_ID=$(alice-eclair-cli getinfo | jq -r .nodeId)
 BOB_ID=$(bob-eclair-cli getinfo | jq -r .nodeId)
@@ -36,8 +36,8 @@ carol-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=255000
 carol-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=295000
 
 echo Generating a few blocks to confirm channels...
-MINER=$(bitcoin-cli getnewaddress)
-bitcoin-cli generatetoaddress 10 $MINER
+MINER=$(btc-cli getnewaddress)
+btc-cli generatetoaddress 10 $MINER
 
 echo Awaiting confirmations...
 sleep 10

@@ -2,9 +2,9 @@
 # This script connects nodes and creates some channels.
 
 shopt -s expand_aliases
-source ../.bash_aliases
+source .bash_aliases
 
-MINER=$(bitcoin-cli getnewaddress)
+MINER=$(btc-cli getnewaddress)
 
 ALICE_ID=$(alice-clightning-cli getinfo | jq -r .id)
 BOB_ID=$(bob-clightning-cli getinfo | jq -r .id)
@@ -18,16 +18,16 @@ echo Dave is $DAVE_ID
 
 echo Adding some Bitcoins to wallets...
 ALICE_ADDR=$(alice-clightning-cli newaddr | jq -r .address)
-bitcoin-cli sendtoaddress $ALICE_ADDR 20
+btc-cli sendtoaddress $ALICE_ADDR 20
 BOB_ADDR=$(bob-clightning-cli newaddr | jq -r .address)
-bitcoin-cli sendtoaddress $BOB_ADDR 15
+btc-cli sendtoaddress $BOB_ADDR 15
 CAROL_ADDR=$(carol-clightning-cli newaddr | jq -r .address)
-bitcoin-cli sendtoaddress $CAROL_ADDR 10
+btc-cli sendtoaddress $CAROL_ADDR 10
 DAVE_ADDR=$(dave-clightning-cli newaddr | jq -r .address)
-bitcoin-cli sendtoaddress $DAVE_ADDR 5
+btc-cli sendtoaddress $DAVE_ADDR 5
 
 echo Generating a few blocks to confirm wallet balances...
-bitcoin-cli generatetoaddress 10 $MINER
+btc-cli generatetoaddress 10 $MINER
 
 echo Opening channels between Alice and Bob...
 alice-clightning-cli connect $BOB_ID localhost 9736
@@ -46,7 +46,7 @@ carol-clightning-cli connect $DAVE_ID localhost 9738
 carol-clightning-cli fundchannel $DAVE_ID 295000
 
 echo Generating a few blocks to confirm channels...
-bitcoin-cli generatetoaddress 10 $MINER
+btc-cli generatetoaddress 10 $MINER
 
 echo Awaiting confirmations...
 sleep 10

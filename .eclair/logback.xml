@@ -5,7 +5,7 @@
         <target>System.out</target>
         <withJansi>false</withJansi>
         <encoder>
-            <pattern>%yellow(${HOSTNAME} %d) %highlight(%-5level) %logger{24} %X{nodeId}%X{channelId}%X{paymentId} - %msg%ex{12}%n</pattern>
+            <pattern>%yellow(${HOSTNAME} %d) %highlight(%-5level) %logger{24}%X{nodeId}%X{channelId}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{12}%n</pattern>
         </encoder>
     </appender>
 
@@ -19,7 +19,7 @@
             <totalSizeCap>5GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d %-5level %logger{24} %X{nodeId}%X{channelId}%X{paymentId} - %msg%ex{24}%n</pattern>
+            <pattern>%d %-5level %logger{24}%X{nodeId}%X{channelId}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{24}%n</pattern>
         </encoder>
     </appender>
 
@@ -29,6 +29,19 @@
             <pattern>%msg%n</pattern>
         </encoder>
     </appender>
+
+    <if condition='isDefined("eclair.printToConsole")'>
+        <then>
+            <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <pattern>%d %-5level %logger{24}%X{nodeId}%X{channelId}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{24}%n</pattern>
+                </encoder>
+            </appender>
+            <root>
+                <appender-ref ref="CONSOLE"/>
+            </root>
+        </then>
+    </if>
 
     <!--
     This logger can be used to dump encryption keys for traffic analysis.
@@ -40,12 +53,12 @@
         <appender-ref ref="KEYLOG"/>
     </logger>
 
-    <logger name="fr.acinq.eclair.router" level="DEBUG"/>
+    <!--<logger name="fr.acinq.eclair.router" level="DEBUG"/>-->
+    <!--<logger name="fr.acinq.eclair.channel" level="DEBUG"/>-->
     <logger name="fr.acinq.eclair.payment" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="ROLLING"/>
-        <appender-ref ref="CONSOLE"/>
     </root>
 
 </configuration>

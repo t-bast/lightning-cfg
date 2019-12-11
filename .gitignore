@@ -6,3 +6,4 @@ regtest
 data
 *.sqlite
 *.sqlite3
+*.pid
