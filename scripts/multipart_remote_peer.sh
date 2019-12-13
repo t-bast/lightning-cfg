@@ -63,7 +63,7 @@ sleep 10
 alice-eclair-cli getsentinfo --id=$PAYMENT_ID
 
 echo Generating multi-part invoice...
-INVOICE2=$(alice-eclair-cli createinvoice --amountMsat=100000000 --description="MPP is #reckless" --allowMultiPart=true | jq .serialized)
+INVOICE2=$(alice-eclair-cli createinvoice --amountMsat=100000000 --description="MPP is #reckless" | jq .serialized)
 PAYMENT_HASH=$(alice-eclair-cli listinvoices | jq '.[0] | .paymentHash')
 sleep 10
 
