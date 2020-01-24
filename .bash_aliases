@@ -21,7 +21,7 @@ alias dave-clightning-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/dave'
 ##### Eclair #####
 
 # Set the path to the eclair-node jar to use:
-ECLAIR_JAR=$HOME/.m2/repository/fr/acinq/eclair/eclair-node_2.11/0.3.2-SNAPSHOT/eclair-node_2.11-0.3.2-SNAPSHOT-capsule.jar
+ECLAIR_JAR=$HOME/Documents/Bitcoin/eclair/eclair-node/target/eclair-node-0.3.3-SNAPSHOT-5303c2d.jar
 # Set the path to the eclair-cli file (see https://github.com/ACINQ/eclair/wiki/Usage):
 ECLAIR_CLI=/usr/bin/eclair-cli
 # Set the path to the eclair logging configuration to use (default one provided in .eclair):
@@ -39,8 +39,8 @@ alias dave-eclair-cli='$ECLAIR_CLI -p password -a localhost:9003'
 ##### LND #####
 
 # Set the path to the lnd and lncli binaries:
-LND_BIN=$HOME/go/bin/lnd
-LND_CLI=$HOME/go/bin/lncli
+LND_BIN=$HOME/Downloads/lnd-linux-amd64-v0.9.0-beta/lnd
+LND_CLI=$HOME/Downloads/lnd-linux-amd64-v0.9.0-beta/lncli
 
 alias alice-lnd='$LND_BIN --lnddir=.lnd/alice'
 alias alice-lnd-cli='$LND_CLI --lnddir=.lnd/alice --rpcserver=localhost:10009 --network=regtest'

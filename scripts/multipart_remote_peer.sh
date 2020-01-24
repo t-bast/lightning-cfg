@@ -6,6 +6,105 @@ shopt -s expand_aliases
 source .bash_aliases
 
 MINER=$(btc-cli getnewaddress)
+
+# Eclair <-> Eclair
+
+# ALICE_ID=$(alice-eclair-cli getinfo | jq -r .nodeId)
+# BOB_ID=$(bob-eclair-cli getinfo | jq -r .nodeId)
+
+# echo Alice is $ALICE_ID
+# echo Bob is $BOB_ID
+
+# echo Opening channels between Alice and Bob...
+# alice-eclair-cli connect --uri=$BOB_ID@localhost:9736
+# alice-eclair-cli open --nodeId=$BOB_ID --fundingSatoshis=150000
+
+# echo Opening channels between Bob and Alice...
+# bob-eclair-cli connect --uri=$ALICE_ID@localhost:9735
+# bob-eclair-cli open --nodeId=$ALICE_ID --fundingSatoshis=160000
+
+# btc-cli generatetoaddress 10 $MINER
+
+# echo Wait channel announced
+# sleep 20
+
+# alice-eclair-cli channels
+
+# echo Check logs and close channels
+# sleep 600
+
+# Eclair <-> C-lightning
+
+# ALICE_ID=$(alice-eclair-cli getinfo | jq -r .nodeId)
+# BOB_ID=$(bob-clightning-cli getinfo | jq -r .id)
+
+# echo Alice is $ALICE_ID
+# echo Bob is $BOB_ID
+
+# echo Adding some Bitcoins to wallets...
+# BOB_ADDR=$(bob-clightning-cli newaddr | jq -r .address)
+# btc-cli sendtoaddress $BOB_ADDR 15
+
+# echo Generating a few blocks to confirm wallet balances...
+# btc-cli generatetoaddress 15 $MINER
+# sleep 30
+# bob-clightning-cli listfunds
+
+# echo Opening channels between Alice and Bob...
+# alice-eclair-cli connect --uri=$BOB_ID@localhost:9736
+# alice-eclair-cli open --nodeId=$BOB_ID --fundingSatoshis=150000
+
+# echo Opening channels between Bob and Alice...
+# bob-clightning-cli connect $ALICE_ID localhost 9735
+# bob-clightning-cli fundchannel $ALICE_ID 160000
+
+# btc-cli generatetoaddress 10 $MINER
+
+# echo Wait channel announced
+# sleep 20
+
+# alice-eclair-cli channels
+
+# echo Check logs and close channels
+# sleep 600
+
+# Eclair <-> lnd
+
+# ALICE_ID=$(alice-eclair-cli getinfo | jq -r .nodeId)
+# BOB_ID=$(bob-lnd-cli getinfo | jq -r .identity_pubkey)
+
+# echo Alice is $ALICE_ID
+# echo Bob is $BOB_ID
+
+# echo Adding some Bitcoins to wallets...
+# BOB_ADDR=$(bob-lnd-cli newaddress p2wkh | jq -r .address)
+# btc-cli sendtoaddress $BOB_ADDR 15
+
+# echo Generating a few blocks to confirm wallet balances...
+# btc-cli generatetoaddress 10 $MINER
+# sleep 30
+
+# echo Opening channels between Alice and Bob...
+# alice-eclair-cli connect --uri=$BOB_ID@localhost:9736
+# alice-eclair-cli open --nodeId=$BOB_ID --fundingSatoshis=150000
+
+# echo Opening channels between Bob and Alice...
+# bob-lnd-cli connect $ALICE_ID@localhost:9735
+# bob-lnd-cli openchannel $ALICE_ID 160000
+
+# btc-cli generatetoaddress 10 $MINER
+
+# echo Wait channel announced
+# sleep 20
+
+# alice-eclair-cli channels
+
+# echo Check logs and close channels
+# sleep 600
+
+# END
+
+MINER=$(btc-cli getnewaddress)
 ALICE_ID=$(alice-eclair-cli getinfo | jq -r .nodeId)
 BOB_ID=$(bob-eclair-cli getinfo | jq -r .nodeId)
 CAROL_ID=$(carol-eclair-cli getinfo | jq -r .nodeId)
