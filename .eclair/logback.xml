@@ -5,7 +5,7 @@
         <target>System.out</target>
         <withJansi>false</withJansi>
         <encoder>
-            <pattern>%yellow(${HOSTNAME} %d) %highlight(%-5level) %logger{24}%X{nodeId}%X{channelId}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{12}%n</pattern>
+            <pattern>%yellow(${HOSTNAME} %d) %highlight(%-5level) %logger{24}%X{category}%X{nodeId}%X{channelId}%X{paymentHash}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{12}%n</pattern>
         </encoder>
     </appender>
 
@@ -19,7 +19,7 @@
             <totalSizeCap>5GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d %-5level %logger{24}%X{nodeId}%X{channelId}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{24}%n</pattern>
+            <pattern>%d %-5level %logger{24}%X{category}%X{nodeId}%X{channelId}%X{paymentHash}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{24}%n</pattern>
         </encoder>
     </appender>
 
@@ -34,7 +34,7 @@
         <then>
             <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder>
-                    <pattern>%d %-5level %logger{24}%X{nodeId}%X{channelId}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{24}%n</pattern>
+                    <pattern>%d %-5level %logger{24}%X{category}%X{nodeId}%X{channelId}%X{paymentHash}%.-11X{parentPaymentId}%.-11X{paymentId} - %msg%ex{24}%n</pattern>
                 </encoder>
             </appender>
             <root>
@@ -49,7 +49,7 @@
     To enable it, set the log level to "DEBUG" for this logger (no need to set it for the root logger).
     See https://github.com/nayutaco/lightning-dissector for details.
      -->
-    <logger level="INFO" name="keylog" additivity="false">
+    <logger level="OFF" name="keylog" additivity="false">
         <appender-ref ref="KEYLOG"/>
     </logger>
 

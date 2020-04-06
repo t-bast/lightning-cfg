@@ -20,20 +20,20 @@ alias dave-clightning-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/dave'
 
 ##### Eclair #####
 
-# Set the path to the eclair-node jar to use:
-ECLAIR_JAR=$HOME/.m2/repository/fr/acinq/eclair/eclair-node_2.11/0.3.3-SNAPSHOT/eclair-node_2.11-0.3.3-SNAPSHOT-capsule.jar
+# Set the path to the eclair-node release to use:
+ECLAIR=$HOME/Downloads/eclair/eclair-node-x.x.x-SNAPSHOT-xxxxxxx/bin/eclair-node.sh
 # Set the path to the eclair-cli file (see https://github.com/ACINQ/eclair/wiki/Usage):
 ECLAIR_CLI=/usr/bin/eclair-cli
 # Set the path to the eclair logging configuration to use (default one provided in .eclair):
 ECLAIR_LOG_CONF=.eclair/logback.xml
 
-alias alice-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/alice -jar $ECLAIR_JAR'
+alias alice-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/alice'
 alias alice-eclair-cli='$ECLAIR_CLI -p password -a localhost:9000'
-alias bob-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/bob -jar $ECLAIR_JAR'
+alias bob-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/bob'
 alias bob-eclair-cli='$ECLAIR_CLI -p password -a localhost:9001'
-alias carol-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/carol -jar $ECLAIR_JAR'
+alias carol-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/carol'
 alias carol-eclair-cli='$ECLAIR_CLI -p password -a localhost:9002'
-alias dave-eclair='java -Dakka.loglevel=DEBUG -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/dave -jar $ECLAIR_JAR'
+alias dave-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/dave'
 alias dave-eclair-cli='$ECLAIR_CLI -p password -a localhost:9003'
 
 ##### LND #####
