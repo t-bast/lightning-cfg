@@ -4,6 +4,7 @@
 *.key
 regtest
 data
+bin
 *.sqlite
 *.sqlite3
 *.pid

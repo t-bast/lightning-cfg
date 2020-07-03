@@ -22,18 +22,19 @@ alice-eclair-cli open --nodeId=$BOB_ID --fundingSatoshis=490000
 
 echo Opening channels between Bob and Carol...
 bob-eclair-cli connect --uri=$CAROL_ID@localhost:9737
-bob-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=505000
+bob-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=285000
+bob-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=305000
 
 echo Opening channels between Carol and Dave...
 carol-eclair-cli connect --uri=$DAVE_ID@localhost:9738
 carol-eclair-cli open --nodeId=$DAVE_ID --fundingSatoshis=500000
 
 echo Generating a few blocks to confirm channels...
-MINER=$(bitcoin-cli getnewaddress)
-bitcoin-cli generatetoaddress 10 $MINER
+MINER=$(btc-cli getnewaddress)
+btc-cli generatetoaddress 10 $MINER
 
 echo Awaiting confirmations...
-sleep 30
+sleep 60
 
 echo Channels confirmed:
 alice-eclair-cli channels | jq '.[] | {shortChannelId: .data.shortChannelId, capacity: .data.channelUpdate.htlcMaximumMsat}'
@@ -48,11 +49,11 @@ sleep 60
 
 echo Paying trampoline invoice
 # Note that the trampoline fee must be the same and needs to be taken into account in the amountMsat values.
-PAYMENT1=$(alice-eclair-cli sendtoroute --amountMsat=160060000 --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=100000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
+PAYMENT1=$(alice-eclair-cli sendtoroute --amountMsat=160050000 --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=80000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
 echo $PAYMENT1
 PARENT_ID=$(echo $PAYMENT1 | jq .parentId)
 SECRET=$(echo $PAYMENT1 | jq .trampolineSecret)
-PAYMENT2=$(alice-eclair-cli sendtoroute --amountMsat=150040000 --parentId=$PARENT_ID --trampolineSecret=$SECRET --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=100000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
+PAYMENT2=$(alice-eclair-cli sendtoroute --amountMsat=150030000 --parentId=$PARENT_ID --trampolineSecret=$SECRET --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=80000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
 echo $PAYMENT2
 
 sleep 15

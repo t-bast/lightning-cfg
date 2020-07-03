@@ -24,8 +24,8 @@ bob-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=370000
 bob-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=180000
 
 echo Generating a few blocks to confirm channels...
-MINER=$(bitcoin-cli getnewaddress)
-bitcoin-cli generatetoaddress 10 $MINER
+MINER=$(btc-cli getnewaddress)
+btc-cli generatetoaddress 10 $MINER
 
 echo Awaiting confirmations...
 sleep 30
@@ -41,11 +41,11 @@ sleep 60
 
 echo Paying trampoline invoice
 # Note that the trampoline fee must be the same and needs to be taken into account in the amountMsat values.
-PAYMENT1=$(alice-eclair-cli sendtoroute --amountMsat=220060000 --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$CAROL_ID --trampolineFeesMsat=100000 --trampolineCltvExpiry=144 --finalCltvExpiry=16 --invoice=$INVOICE)
+PAYMENT1=$(alice-eclair-cli sendtoroute --amountMsat=220010000 --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$CAROL_ID --trampolineFeesMsat=50000 --trampolineCltvExpiry=144 --finalCltvExpiry=16 --invoice=$INVOICE)
 echo $PAYMENT1
 PARENT_ID=$(echo $PAYMENT1 | jq .parentId)
 SECRET=$(echo $PAYMENT1 | jq .trampolineSecret)
-PAYMENT2=$(alice-eclair-cli sendtoroute --amountMsat=200040000 --parentId=$PARENT_ID --trampolineSecret=$SECRET --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$CAROL_ID --trampolineFeesMsat=100000 --trampolineCltvExpiry=144 --finalCltvExpiry=16 --invoice=$INVOICE)
+PAYMENT2=$(alice-eclair-cli sendtoroute --amountMsat=200040000 --parentId=$PARENT_ID --trampolineSecret=$SECRET --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$CAROL_ID --trampolineFeesMsat=50000 --trampolineCltvExpiry=144 --finalCltvExpiry=16 --invoice=$INVOICE)
 echo $PAYMENT2
 
 sleep 10
