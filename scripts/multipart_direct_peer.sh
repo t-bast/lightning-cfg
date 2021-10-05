@@ -34,7 +34,7 @@ echo Channels confirmed:
 alice-eclair-cli channels | jq '.[] | {shortChannelId: .data.shortChannelId, capacity: .data.channelUpdate.htlcMaximumMsat}'
 
 echo Generating multi-part invoice...
-INVOICE=$(dave-lnd-cli addinvoice --memo="MPP is #reckless" 130000 | jq .pay_req)
+INVOICE=$(dave-lnd-cli addinvoice --memo="MPP is #reckless" 130000 | jq .payment_request)
 
 echo Awaiting broadcast network state...
 sleep 60

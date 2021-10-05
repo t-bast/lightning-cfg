@@ -61,9 +61,9 @@ bob-lnd-cli listchannels | jq '.channels[] | {shortChannelId: .chan_id, capacity
 carol-lnd-cli listchannels | jq '.channels[] | {shortChannelId: .chan_id, capacity: .capacity, localBalance: .local_balance}'
 
 echo Creating a few invoices:
-DAVE_INVOICE=$(dave-lnd-cli addinvoice --memo="Lightning is #reckless" 150000 | jq '. | {invoice: .pay_req, paymentHash: .r_hash}')
+DAVE_INVOICE=$(dave-lnd-cli addinvoice --memo="Lightning is #reckless" 150000 | jq '. | {invoice: .payment_request, paymentHash: .r_hash}')
 echo Dave pending invoice:
 echo $DAVE_INVOICE
-BOB_INVOICE=$(bob-lnd-cli addinvoice --memo="Lightning is #reckless" 200000 | jq '. | {invoice: .pay_req, paymentHash: .r_hash}')
+BOB_INVOICE=$(bob-lnd-cli addinvoice --memo="Lightning is #reckless" 200000 | jq '. | {invoice: .payment_request, paymentHash: .r_hash}')
 echo Bob pending invoice:
 echo $BOB_INVOICE
