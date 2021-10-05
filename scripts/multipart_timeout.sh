@@ -17,7 +17,7 @@ echo Carol is $CAROL_ID
 echo Dave is $DAVE_ID
 
 echo Adding some Bitcoins to wallets...
-DAVE_ADDR=$(dave-clightning-cli newaddr | jq -r .address)
+DAVE_ADDR=$(dave-clightning-cli newaddr | jq -r .bech32)
 btc-cli sendtoaddress $DAVE_ADDR 15
 
 echo Generating a few blocks to confirm wallet balances...

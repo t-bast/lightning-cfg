@@ -17,13 +17,13 @@ echo Carol is $CAROL_ID
 echo Dave is $DAVE_ID
 
 echo Adding some Bitcoins to wallets...
-ALICE_ADDR=$(alice-clightning-cli newaddr | jq -r .address)
+ALICE_ADDR=$(alice-clightning-cli newaddr | jq -r .bech32)
 btc-cli sendtoaddress $ALICE_ADDR 20
-BOB_ADDR=$(bob-clightning-cli newaddr | jq -r .address)
+BOB_ADDR=$(bob-clightning-cli newaddr | jq -r .bech32)
 btc-cli sendtoaddress $BOB_ADDR 15
-CAROL_ADDR=$(carol-clightning-cli newaddr | jq -r .address)
+CAROL_ADDR=$(carol-clightning-cli newaddr | jq -r .bech32)
 btc-cli sendtoaddress $CAROL_ADDR 10
-DAVE_ADDR=$(dave-clightning-cli newaddr | jq -r .address)
+DAVE_ADDR=$(dave-clightning-cli newaddr | jq -r .bech32)
 btc-cli sendtoaddress $DAVE_ADDR 5
 
 echo Generating a few blocks to confirm wallet balances...
