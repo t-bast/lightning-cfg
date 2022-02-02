@@ -49,11 +49,11 @@ sleep 60
 
 echo Paying trampoline invoice
 # Note that the trampoline fee must be the same and needs to be taken into account in the amountMsat values.
-PAYMENT1=$(alice-eclair-cli sendtoroute --amountMsat=160050000 --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=80000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
+PAYMENT1=$(alice-eclair-cli sendtoroute --amountMsat=160050000 --nodeIds=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=80000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
 echo $PAYMENT1
 PARENT_ID=$(echo $PAYMENT1 | jq .parentId)
 SECRET=$(echo $PAYMENT1 | jq .trampolineSecret)
-PAYMENT2=$(alice-eclair-cli sendtoroute --amountMsat=150030000 --parentId=$PARENT_ID --trampolineSecret=$SECRET --route=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=80000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
+PAYMENT2=$(alice-eclair-cli sendtoroute --amountMsat=150030000 --parentId=$PARENT_ID --trampolineSecret=$SECRET --nodeIds=$ALICE_ID,$BOB_ID --trampolineNodes=$BOB_ID,$DAVE_ID --trampolineFeesMsat=80000 --trampolineCltvExpiry=432 --finalCltvExpiry=16 --invoice=$INVOICE)
 echo $PAYMENT2
 
 sleep 15

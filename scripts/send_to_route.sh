@@ -22,8 +22,8 @@ bob-eclair-cli connect --uri=$CAROL_ID@localhost:9737
 bob-eclair-cli open --nodeId=$CAROL_ID --fundingSatoshis=500000
 
 echo Generating a few blocks to confirm channels...
-MINER=$(bitcoin-cli getnewaddress)
-bitcoin-cli generatetoaddress 10 $MINER
+MINER=$(btc-cli getnewaddress)
+btc-cli generatetoaddress 10 $MINER
 
 echo Awaiting confirmations...
 sleep 30
@@ -39,14 +39,14 @@ echo Awaiting broadcast network state...
 sleep 60
 
 echo Paying first invoice
-PAYMENT_ID1=$(alice-eclair-cli sendtoroute --amountMsat=250000000 --route=$ALICE_ID,$BOB_ID,$CAROL_ID --finalCltvExpiry=16 --invoice=$INVOICE1 | jq .parentId)
+PAYMENT_ID1=$(alice-eclair-cli sendtoroute --amountMsat=250000000 --nodeIds=$ALICE_ID,$BOB_ID,$CAROL_ID --finalCltvExpiry=16 --invoice=$INVOICE1 | jq .parentId)
 sleep 10
 
 echo Checking payment status...
 alice-eclair-cli getsentinfo --id=$PAYMENT_ID1
 
 echo Paying second invoice
-PAYMENT_ID2=$(alice-eclair-cli sendtoroute --amountMsat=200000000 --route=$ALICE_ID,$BOB_ID,$CAROL_ID --finalCltvExpiry=16 --invoice=$INVOICE2 | jq .parentId)
+PAYMENT_ID2=$(alice-eclair-cli sendtoroute --amountMsat=200000000 --nodeIds=$ALICE_ID,$BOB_ID,$CAROL_ID --finalCltvExpiry=16 --invoice=$INVOICE2 | jq .parentId)
 sleep 10
 
 echo Checking payment status...
