@@ -50,3 +50,13 @@ alias carol-lnd='$LND_BIN --lnddir=.lnd/carol'
 alias carol-lnd-cli='$LND_CLI --lnddir=.lnd/carol --rpcserver=localhost:10011 --network=regtest'
 alias dave-lnd='$LND_BIN --lnddir=.lnd/dave'
 alias dave-lnd-cli='$LND_CLI --lnddir=.lnd/dave --rpcserver=localhost:10012 --network=regtest'
+
+##### LDK #####
+
+# Set the path to the ldk-tutorial node (see https://github.com/lightningdevkit/ldk-sample):
+LDK_BIN=.ldk/bin/ldk-tutorial-node
+
+alias alice-ldk='$LDK_BIN user:password@localhost:18443 .ldk/alice/data 9735 regtest'
+alias bob-ldk='$LDK_BIN user:password@localhost:18443 .ldk/bob/data 9736 regtest'
+alias carol-ldk='$LDK_BIN user:password@localhost:18443 .ldk/carol/data 9737 regtest'
+alias dave-ldk='$LDK_BIN user:password@localhost:18443 .ldk/dave/data 9738 regtest'
