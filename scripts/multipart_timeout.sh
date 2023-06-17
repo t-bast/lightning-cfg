@@ -59,11 +59,11 @@ echo Awaiting broadcast network state...
 sleep 60
 
 echo Paying multi-part invoice first part
-PAYMENT_ID_1=$(alice-eclair-cli sendtoroute --amountMsat=100000000 --paymentHash=$PAYMENT_HASH --route=$ALICE_ID,$BOB_ID,$DAVE_ID --finalCltvExpiry=144 --invoice=$INVOICE)
+PAYMENT_ID_1=$(alice-eclair-cli sendtoroute --amountMsat=100000000 --paymentHash=$PAYMENT_HASH --nodeIds=$ALICE_ID,$BOB_ID,$DAVE_ID --finalCltvExpiry=144 --invoice=$INVOICE | jq .parentId)
 echo $PAYMENT_ID_1
 
 echo Paying multi-part invoice second part
-PAYMENT_ID_2=$(alice-eclair-cli sendtoroute --amountMsat=100000000 --paymentHash=$PAYMENT_HASH --route=$ALICE_ID,$CAROL_ID,$DAVE_ID --finalCltvExpiry=144 --invoice=$INVOICE)
+PAYMENT_ID_2=$(alice-eclair-cli sendtoroute --amountMsat=100000000 --paymentHash=$PAYMENT_HASH --nodeIds=$ALICE_ID,$CAROL_ID,$DAVE_ID --finalCltvExpiry=144 --invoice=$INVOICE | jq .parentId)
 echo $PAYMENT_ID_2
 
 echo Waiting for a timeout...
