@@ -3,8 +3,15 @@
 *.cert
 *.key
 regtest
+testnet3
+testnet4
 data
 bin
 *.sqlite
 *.sqlite3
 *.pid
+.grafana
+.prometheus
+*.kexe
+phoenix-cli
+phoenixd

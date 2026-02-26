@@ -9,38 +9,39 @@ alias btc-cli='bitcoin-cli -datadir=.bitcoin'
 CLIGHTNING_BIN=/usr/local/bin/lightningd
 CLIGHTNING_CLI=/usr/local/bin/lightning-cli
 
-alias alice-clightning='$CLIGHTNING_BIN --lightning-dir=.lightning/alice'
-alias alice-clightning-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/alice'
-alias bob-clightning='$CLIGHTNING_BIN --lightning-dir=.lightning/bob'
-alias bob-clightning-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/bob'
-alias carol-clightning='$CLIGHTNING_BIN --lightning-dir=.lightning/carol'
-alias carol-clightning-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/carol'
-alias dave-clightning='$CLIGHTNING_BIN --lightning-dir=.lightning/dave'
-alias dave-clightning-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/dave'
+alias alice-cln='$CLIGHTNING_BIN --lightning-dir=.lightning/alice --experimental-dual-fund --experimental-splicing'
+alias alice-cln-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/alice'
+alias bob-cln='$CLIGHTNING_BIN --lightning-dir=.lightning/bob --experimental-dual-fund --experimental-splicing'
+alias bob-cln-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/bob'
+alias carol-cln='$CLIGHTNING_BIN --lightning-dir=.lightning/carol'
+alias carol-cln-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/carol'
+alias dave-cln='$CLIGHTNING_BIN --lightning-dir=.lightning/dave'
+alias dave-cln-cli='$CLIGHTNING_CLI --lightning-dir=.lightning/dave'
 
 ##### Eclair #####
 
 # Set the path to the eclair-node release to use:
-ECLAIR=$HOME/Downloads/eclair-node-x.x.x-xxxxxxx/bin/eclair-node.sh
+ECLAIR=.eclair/bin/eclair-node-0.14.0-SNAPSHOT-d473b53/bin/eclair-node.sh
+ECLAIR_RELEASE=.eclair/bin/eclair-node-0.13.0-992ec8c/bin/eclair-node.sh
 # Set the path to the eclair-cli file (see https://github.com/ACINQ/eclair/wiki/Usage):
-ECLAIR_CLI=$HOME/Downloads/eclair-node-x.x.x-xxxxxxx/bin/eclair-cli
+ECLAIR_CLI=.eclair/bin/eclair-node-0.14.0-SNAPSHOT-d473b53/bin/eclair-cli
 # Set the path to the eclair logging configuration to use (default one provided in .eclair):
 ECLAIR_LOG_CONF=.eclair/logback.xml
 
-alias alice-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/alice'
+alias alice-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/alice -Declair.allow-unsafe-startup=true'
 alias alice-eclair-cli='$ECLAIR_CLI -p password -a localhost:9000'
-alias bob-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/bob'
+alias bob-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/bob -Declair.allow-unsafe-startup=true'
 alias bob-eclair-cli='$ECLAIR_CLI -p password -a localhost:9001'
-alias carol-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/carol'
+alias carol-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/carol -Declair.allow-unsafe-startup=true'
 alias carol-eclair-cli='$ECLAIR_CLI -p password -a localhost:9002'
-alias dave-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/dave'
+alias dave-eclair='$ECLAIR -Dlogback.configurationFile=$ECLAIR_LOG_CONF -Declair.datadir=.eclair/dave -Declair.allow-unsafe-startup=true'
 alias dave-eclair-cli='$ECLAIR_CLI -p password -a localhost:9003'
 
 ##### LND #####
 
 # Set the path to the lnd and lncli binaries:
-LND_BIN=$HOME/go/bin/lnd
-LND_CLI=$HOME/go/bin/lncli
+LND_BIN=.lnd/bin/lnd
+LND_CLI=.lnd/bin/lncli
 
 alias alice-lnd='$LND_BIN --lnddir=.lnd/alice'
 alias alice-lnd-cli='$LND_CLI --lnddir=.lnd/alice --rpcserver=localhost:10009 --network=regtest'
@@ -53,10 +54,10 @@ alias dave-lnd-cli='$LND_CLI --lnddir=.lnd/dave --rpcserver=localhost:10012 --ne
 
 ##### LDK #####
 
-# Set the path to the ldk-tutorial node (see https://github.com/lightningdevkit/ldk-sample):
-LDK_BIN=.ldk/bin/ldk-tutorial-node
+LDK_BIN=.ldk/bin/ldk-server
+LDK_CLI=.ldk/bin/ldk-server-cli
 
-alias alice-ldk='$LDK_BIN user:password@localhost:18443 .ldk/alice/data 9735 regtest'
-alias bob-ldk='$LDK_BIN user:password@localhost:18443 .ldk/bob/data 9736 regtest'
-alias carol-ldk='$LDK_BIN user:password@localhost:18443 .ldk/carol/data 9737 regtest'
-alias dave-ldk='$LDK_BIN user:password@localhost:18443 .ldk/dave/data 9738 regtest'
+alias alice-ldk='$LDK_BIN .ldk/alice/config.toml'
+alias alice-ldk-cli='$LDK_CLI -b localhost:9000'
+alias bob-ldk='$LDK_BIN .ldk/bob/config.toml'
+alias bob-ldk-cli='$LDK_CLI -b localhost:9001'

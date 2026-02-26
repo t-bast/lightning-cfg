@@ -1,0 +1,12 @@
+[node]
+network = "regtest"
+listening_address = "localhost:9735"
+rest_service_address = "127.0.0.1:9000"
+
+[storage.disk]
+dir_path = ""
+
+[bitcoind]
+rpc_address = "127.0.0.1:18443"
+rpc_user = "user"
+rpc_password = "password"
